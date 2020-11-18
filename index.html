@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blending Board</title>
+
+    <link rel="stylesheet" href="bundle.css">
+    <link rel="stylesheet" href="style.css">
+
+
+</head>
+<body>
+    <main id="page">
+
+        <div id="app">
+
+            <div class="blending-game">
+                <div class="app-columns cards">
+                    <div class="card-group card-group-one">
+                        <button class="card-item" v-for="(item, index) in inputOne" @click="clickCard" v-cloak>
+                            {{ item }}
+                            <span>{{ index + 1 }} / {{ inputOne.length }}</span>
+                        </button>
+                    </div>
+                    <div class="card-group card-group-two">
+                        <button class="card-item" v-for="(item, index) in inputTwo" @click="clickCard" v-cloak>
+                            {{ item }}
+                            <span>{{ index + 1 }} / {{ inputTwo.length }}</span>
+                        </button>
+                    </div>
+                    <div class="card-group card-group-three">
+                        <button class="card-item" v-for="(item, index) in inputThree" @click="clickCard" v-cloak>
+                            {{ item }}
+                            <span>{{ index + 1 }} / {{ inputThree.length }}</span>
+                        </button>
+                    </div>
+                    <div class="card-group card-group-four" v-if="inputFour.length >= 1">
+                        <button class="card-item" v-for="(item, index) in inputFour" @click="clickCard" v-cloak>
+                            {{ item }}
+                            <span>{{ index + 1 }} / {{ inputFour.length }}</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="app-columns fields" v-if="stage === '1'">
+                <p class="app-columns-full">Provide a comma separated list of letters for each set of cards. Then, click the <strong>Create Game</strong> button to generate a unique game with your letter choices.</p>
+                <div class="field">
+                    <label for="inputOne">First Cards</label>
+                    <input type="text" id="inputOne" v-model="inputOne" placeholder="b, c, d, f" v-on:keyup="updateCardsOne">
+                </div>
+                <div class="field">
+                    <label for="inputTwo">Second Cards</label>
+                    <input type="text" id="inputTwo" v-model="inputTwo"  placeholder="a, e, i, o, u" v-on:keyup="updateCardsTwo">
+                </div>
+                <div class="field">
+                    <label for="inputThree">Third Cards</label>
+                    <input type="text" id="inputThree" v-model="inputThree" placeholder="g, h, j, k" v-on:keyup="updateCardsThree">
+                </div>
+                 <div class="field">
+                    <label for="inputFour">Fourth Cards</label>
+                    <input type="text" id="inputFour" v-model="inputFour" placeholder="g, h, j, k" v-on:keyup="updateCardsFour">
+                </div>
+                <div class="buttons game-link">
+                    <button class="button -secondary" @click="createGameLink">Create Game</button>
+                </div>
+                <div class="game-link" v-if="gameLink != ''">
+                    <label for="gameLink">Game Link</label>
+                    <input type="text" id="gameLink" v-model="gameLink" @click="inputSelection">
+                </div>
+            </div>
+
+        </div>
+
+
+    </main>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.11/vue.min.js"></script>
+    <script src="scripts.js"></script>
+
+</body>
+</html>
